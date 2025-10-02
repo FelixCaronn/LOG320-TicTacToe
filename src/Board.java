@@ -43,7 +43,61 @@ class Board
     //           0   pour un match nul
     // Ne pas changer la signature de cette méthode
     public int evaluate(Mark mark){
+        //Vérifier lignes
+        for(int i = 0; i < 3; i++)
+        {
+            Mark firstMark = board[i][0];
+            if(firstMark != Mark.EMPTY && firstMark == board[i][1] && firstMark == board[i][2])
+            {
+                if(firstMark.equals(mark))
+                {
+                    return 100;
+                }
 
+                return -100;
+            }
+        }
+
+        //Vérifier colonnes
+        for(int i = 0; i < 3; i++)
+        {
+            Mark firstMark = board[0][i];
+            if(firstMark != Mark.EMPTY && firstMark == board[1][i] && firstMark == board[2][i])
+            {
+                if(firstMark.equals(mark))
+                {
+                    return 100;
+                }
+
+                return -100;
+            }
+        }
+
+        //Vérifier diagonales
+        Mark firstMarkDiagOne = board[0][0];
+        if(firstMarkDiagOne != Mark.EMPTY && firstMarkDiagOne == board[1][1] && firstMarkDiagOne == board[2][2])
+        {
+            if(firstMarkDiagOne.equals(mark))
+            {
+                return 100;
+            }
+
+            return -100;
+        }
+
+        Mark firstMarkDiagTwo = board[0][2];
+        if(firstMarkDiagTwo != Mark.EMPTY && firstMarkDiagTwo == board[1][1] && firstMarkDiagTwo == board[2][0])
+        {
+            if(firstMarkDiagTwo.equals(mark))
+            {
+                return 100;
+            }
+
+            return -100;
+        }
+
+        //Sinon, cela veut dire que le tableau est plein sans ligne complète, donc c'est un match nul
+        return 0;
     }
 
     //Fonction qui retourne toutes les cases disponibles
